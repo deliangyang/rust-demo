@@ -59,7 +59,7 @@ pub fn eval(tokens: &[Token]) -> Option<isize> {
 fn main() {
     // 3 2 5 - 6 * +
     // 2 * 23 + 12 - 2 * (2 + 1)
-    let a = "5 - 2 * (6 + 3 -1)";
+    let a = "5 - 1 - 2 -3 - 2 * (6 + 3 -1)";
     let chars = a.chars();
     let mut a = vec![];
     let mut stack = vec![];
@@ -90,6 +90,10 @@ fn main() {
                                    Operator::Add => {
                                        stack.pop().unwrap();
                                        a.push(Token::Operator(Operator::Add));
+                                   }
+                                   Operator::Sub => {
+                                        stack.pop().unwrap();
+                                        a.push(Token::Operator(Operator::Sub));
                                    }
                                    _ => {
                                        println!("break -");
@@ -125,6 +129,10 @@ fn main() {
                                     Operator::Sub => {
                                         stack.pop().unwrap();
                                         a.push(Token::Operator(Operator::Sub));
+                                    }
+                                    Operator::Add => {
+                                        stack.pop().unwrap();
+                                        a.push(Token::Operator(Operator::Add));
                                     }
                                     _ => {
                                         println!("break -");
